@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environment
+.venv
+.uv-cache/
+
+# Agent working files
+CLAUDE.md
+AGENTS.md
+run.log
+
+# Results — tracked locally only, do not commit
+results.tsv
+results_v2.tsv
+
+# Claude Code local settings
+.claude/
+
+# Data cache lives in ~/.cache/polymarket-research/, not in repo
+*.csv

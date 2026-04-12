@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <h1>Research Dashboard</h1>
+      <span id="current-branch" class="branch-badge">—</span>
+    </div>
+    <div class="header-right">
+      <span id="status-dot" class="status-dot"></span>
+      <span id="status-text" class="status-text">connecting…</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- Best experiment summary -->
+    <section class="card best-card">
+      <h2 class="section-title">Best Experiment</h2>
+      <div class="metrics-row">
+        <div class="metric">
+          <span class="metric-label">Score</span>
+          <span id="best-score" class="metric-value positive">—</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Total Return</span>
+          <span id="best-totalret" class="metric-value">—</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Max DD</span>
+          <span id="best-maxdd" class="metric-value">—</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Trades</span>
+          <span id="best-trades" class="metric-value">—</span>
+        </div>
+      </div>
+      <p id="best-desc" class="best-desc">—</p>
+    </section>
+
+    <!-- All iterations overview -->
+    <section class="card overview-card">
+      <div class="overview-header">
+        <h2 class="section-title">All Iterations <span id="iter-total" class="count-badge">0</span></h2>
+        <div class="iter-stats">
+          <span class="iter-stat keep-stat"><span id="stat-keep">0</span> keep</span>
+          <span class="iter-stat discard-stat"><span id="stat-discard">0</span> discard</span>
+          <span class="iter-stat crash-stat"><span id="stat-crash">0</span> crash</span>
+          <span class="iter-stat oos-stat"><span id="stat-oos-rate">—</span> OOS pass</span>
+        </div>
+      </div>
+      <div class="overview-chart-wrap">
+        <canvas id="chart-overview"></canvas>
+      </div>
+    </section>
+
+    <!-- Metrics charts -->
+    <section class="card charts-card">
+      <h2 class="section-title">Metrics Over Time</h2>
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <h3 class="chart-title">Score</h3>
+          <canvas id="chart-roi"></canvas>
+        </div>
+        <div class="chart-wrap">
+          <h3 class="chart-title">Total Return</h3>
+          <canvas id="chart-winrate"></canvas>
+        </div>
+        <div class="chart-wrap">
+          <h3 class="chart-title">Max Drawdown</h3>
+          <canvas id="chart-sharpe"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiments table -->
+    <section class="card table-card">
+      <h2 class="section-title">Experiments <span id="exp-count" class="count-badge"></span></h2>
+      <div class="table-wrap">
+        <table id="experiments-table">
+          <thead>
+            <tr>
+              <th>Commit</th>
+              <th>Description</th>
+              <th>Score</th>
+              <th>Total Return</th>
+              <th>Max DD</th>
+              <th>Win Rate</th>
+              <th>Trades</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="exp-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Diff panel (shown when a row is clicked) -->
+    <div id="diff-panel" class="card diff-panel hidden">
+      <div class="diff-header">
+        <h2 class="section-title">Strategy Diff — <code id="diff-commit-label"></code></h2>
+        <button id="diff-close" class="icon-btn" title="Close">✕</button>
+      </div>
+      <pre id="diff-viewer" class="diff-viewer"></pre>
+    </div>
+
+    <!-- Latest run output -->
+    <section class="card log-card">
+      <h2 class="section-title">Latest Run Output</h2>
+      <pre id="log-panel" class="log-panel">—</pre>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
