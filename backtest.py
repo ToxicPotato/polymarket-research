@@ -54,6 +54,8 @@ def strategy(market):
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "coin-hour filter"}
     if coin == "ETH" and hour == 19 and duration_min == 5:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "coin-hour-duration filter"}
+    if coin == "BTC" and hour == 19 and duration_min == 15:
+        return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "coin-hour-duration filter"}
     if day_of_week == 0:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "weekday filter"}
     if day_of_week == 5:
