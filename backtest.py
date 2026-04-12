@@ -88,6 +88,8 @@ def strategy(market):
         threshold = 0.0200
     if coin == "BTC" and hour == 19:
         threshold -= 0.0050
+    if coin == "SOL" and hour == 7 and day_of_week == 6:
+        threshold += 0.0025
     threshold = max(0.0, threshold)
     if day_of_week == 6 and coin == "BTC":
         threshold += 0.0050
