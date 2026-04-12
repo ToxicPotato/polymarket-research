@@ -84,6 +84,8 @@ def strategy(market):
         threshold = 0.0175
     if hour == 21:
         threshold = 0.0200
+    if day_of_week == 6 and coin == "BTC":
+        threshold += 0.0050
     if signal > threshold:
         return {"side": -1, "size": 1.0, "confidence": abs(signal), "reason": "mean-reversion down"}
     if signal < -threshold:
