@@ -49,12 +49,11 @@ def strategy(market):
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "hour filter"}
     coin = market.get("coin")
     duration_min = market.get("duration_min")
+    day_of_week = market.get("day_of_week")
     if coin == "ETH" and hour == 20:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "coin-hour filter"}
     if coin == "ETH" and hour == 19 and duration_min == 5:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "coin-hour-duration filter"}
-
-    day_of_week = market.get("day_of_week")
     if day_of_week == 0:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "weekday filter"}
     if day_of_week == 5:
@@ -67,29 +66,30 @@ def strategy(market):
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "hour-weekday-duration filter"}
     if hour == 7 and day_of_week == 2 and coin == "SOL" and duration_min == 5:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "hour-weekday-coin-duration filter"}
-    if hour == 7 and day_of_week == 6 and coin == "BTC" and duration_min == 15:
-        return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "hour-weekday-coin-duration filter"}
     if hour == 7 and day_of_week == 3 and coin == "ETH" and duration_min == 15:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "hour-weekday-coin-duration filter"}
 
-    pc_1h = market.get("price_change_1h")
-    if pc_1h is None:
+    signal = market.get("price_change_1h")
+    if signal is None:
         return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "no price data"}
 
-    threshold = 0.0225 if hour in {17, 20} else 0.015
+    threshold = 0.0150
     if hour == 7:
-        threshold = 0.0
+        threshold = 0.0000
+    if hour == 17:
+        threshold = 0.0225
+    if hour == 19:
+        threshold = 0.0150
     if hour == 20:
         threshold = 0.0175
     if hour == 21:
-        threshold = 0.02
-    if pc_1h > threshold:
-        return {"side": -1, "size": 1.0, "confidence": abs(pc_1h), "reason": "mean-reversion down"}
-    if pc_1h < -threshold:
-        return {"side": 1,  "size": 1.0, "confidence": abs(pc_1h), "reason": "mean-reversion up"}
+        threshold = 0.0200
+    if signal > threshold:
+        return {"side": -1, "size": 1.0, "confidence": abs(signal), "reason": "mean-reversion down"}
+    if signal < -threshold:
+        return {"side": 1,  "size": 1.0, "confidence": abs(signal), "reason": "mean-reversion up"}
 
     return {"side": 0, "size": 0.0, "confidence": 0.0, "reason": "no signal"}
-
 
 # ── Output helpers ────────────────────────────────────────────────────────────
 
