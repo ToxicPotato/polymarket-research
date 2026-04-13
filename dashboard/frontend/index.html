@@ -37,6 +37,14 @@
           <span id="best-maxdd" class="metric-value">—</span>
         </div>
         <div class="metric">
+          <span class="metric-label">Win Rate</span>
+          <span id="best-winrate" class="metric-value">—</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Trade Sharpe</span>
+          <span id="best-sharpe" class="metric-value">—</span>
+        </div>
+        <div class="metric">
           <span class="metric-label">Trades</span>
           <span id="best-trades" class="metric-value">—</span>
         </div>
@@ -76,6 +84,18 @@
           <h3 class="chart-title">Max Drawdown</h3>
           <canvas id="chart-sharpe"></canvas>
         </div>
+        <div class="chart-wrap">
+          <h3 class="chart-title">Win Rate</h3>
+          <canvas id="chart-winrate-time"></canvas>
+        </div>
+        <div class="chart-wrap">
+          <h3 class="chart-title">Trade Sharpe</h3>
+          <canvas id="chart-trade-sharpe"></canvas>
+        </div>
+        <div class="chart-wrap">
+          <h3 class="chart-title">Num Trades</h3>
+          <canvas id="chart-num-trades"></canvas>
+        </div>
       </div>
     </section>
 
@@ -92,6 +112,7 @@
               <th>Total Return</th>
               <th>Max DD</th>
               <th>Win Rate</th>
+              <th>Sharpe</th>
               <th>Trades</th>
               <th>Status</th>
             </tr>

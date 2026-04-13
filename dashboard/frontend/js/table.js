@@ -49,6 +49,7 @@ export function renderTable(experiments, bestCommit) {
       <td>${fmt(exp.total_return)}</td>
       <td>${fmt(exp.max_drawdown)}</td>
       <td>${fmtPct(exp.win_rate)}</td>
+      <td>${fmt(exp.trade_sharpe)}</td>
       <td>${exp.num_trades !== null ? exp.num_trades.toLocaleString() : "—"}</td>
       <td>${statusBadge(exp.status)}${oosBadge(exp.oos_pass)}</td>
     `;

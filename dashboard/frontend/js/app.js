@@ -14,6 +14,10 @@ function updateBestCard(experiments, bestCommit) {
   document.getElementById("best-score").textContent    = fmt(best.score);
   document.getElementById("best-totalret").textContent = fmt(best.total_return);
   document.getElementById("best-maxdd").textContent    = fmt(best.max_drawdown);
+  document.getElementById("best-winrate").textContent  = best.win_rate !== null && best.win_rate !== undefined
+    ? (best.win_rate * 100).toFixed(2) + "%"
+    : "—";
+  document.getElementById("best-sharpe").textContent   = fmt(best.trade_sharpe);
   document.getElementById("best-trades").textContent   = best.num_trades !== null
     ? best.num_trades.toLocaleString()
     : "—";

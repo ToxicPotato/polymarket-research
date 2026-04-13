@@ -35,6 +35,7 @@ function makeDataset(label, color) {
 }
 
 let chartRoi, chartWinrate, chartSharpe, chartOverview;
+let chartWinrateTime, chartTradeSharpe, chartNumTrades;
 
 export function initCharts() {
   const cfg = (id, label, color) => ({
@@ -43,9 +44,12 @@ export function initCharts() {
     options: CHART_DEFAULTS,
   });
 
-  chartRoi     = new Chart(document.getElementById("chart-roi"),     cfg("chart-roi",     "Score",        "#58a6ff"));
-  chartWinrate = new Chart(document.getElementById("chart-winrate"), cfg("chart-winrate", "Total Return", "#bc8cff"));
-  chartSharpe  = new Chart(document.getElementById("chart-sharpe"),  cfg("chart-sharpe",  "Max Drawdown", "#ffa657"));
+  chartRoi          = new Chart(document.getElementById("chart-roi"),           cfg("chart-roi",           "Score",        "#58a6ff"));
+  chartWinrate      = new Chart(document.getElementById("chart-winrate"),       cfg("chart-winrate",       "Total Return", "#bc8cff"));
+  chartSharpe       = new Chart(document.getElementById("chart-sharpe"),        cfg("chart-sharpe",        "Max Drawdown", "#ffa657"));
+  chartWinrateTime  = new Chart(document.getElementById("chart-winrate-time"),  cfg("chart-winrate-time",  "Win Rate",     "#3fb950"));
+  chartTradeSharpe  = new Chart(document.getElementById("chart-trade-sharpe"),  cfg("chart-trade-sharpe",  "Trade Sharpe", "#f0883e"));
+  chartNumTrades    = new Chart(document.getElementById("chart-num-trades"),    cfg("chart-num-trades",    "Num Trades",   "#a371f7"));
 
   chartOverview = new Chart(document.getElementById("chart-overview"), {
     type: "scatter",
@@ -105,9 +109,12 @@ export function updateCharts(experiments) {
     chart.update();
   }
 
-  applyTo(chartRoi,     valid.map(e => e.score));
-  applyTo(chartWinrate, valid.map(e => e.total_return));
-  applyTo(chartSharpe,  valid.map(e => e.max_drawdown));
+  applyTo(chartRoi,         valid.map(e => e.score));
+  applyTo(chartWinrate,     valid.map(e => e.total_return));
+  applyTo(chartSharpe,      valid.map(e => e.max_drawdown));
+  applyTo(chartWinrateTime, valid.map(e => e.win_rate));
+  applyTo(chartTradeSharpe, valid.map(e => e.trade_sharpe));
+  applyTo(chartNumTrades,   valid.map(e => e.num_trades));
 
   // Overview — score over time, keep experiments connected by a line
   // Use original index so X = true iteration number even with gaps
